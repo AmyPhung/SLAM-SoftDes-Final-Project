@@ -30,6 +30,9 @@ def Navigation(start,finish, map):
     """
     Inputs: starting pixel, finishing pixel, map location
     Outputs: Draws a line of the path the robot needs to take to get to the goal.
+    Right now, this is a very bad implementation of a pathfinding algorithm. I originally
+    meant it to be A*, but didn't do a very good job. Below is my start to an actual A* algorithm.
+    Currently this implementation takes a long time to run.
     """
     sizeOfRobot = 20 # defines the radius of the robot in pixels
     map = Image.open(map) # gets the map image
@@ -103,7 +106,83 @@ def Navigation(start,finish, map):
         oldPixel = coordToGoTo # does it again
     solution.save("Maps/solution.png") # saves the solution to a new picture.
     return ListOfCoordinates
+def actualAStar(start,finish,map):
+    """
+    Inputs: starting pixel, finishing pixel, map location
+    Outputs: Draws a line of the path the robot needs to take to get to the goal.
+    currently is still being optimized. It doesn't work excellently as it searches too much.
+    """
+    sizeOfRobot = 20
+    map = Image.open(map) # gets the map image
+    solution = map # makes a solution map
+    x_size = map.size[0] # the x length of the image
+    y_size = map.size[1] # the y length of the image
+    initialNumber = 10000 # sets the initial values for the Gs, Fs and Hs
+    Gs = [[initialNumber for y in range(y_size)] for x in range(x_size)] # initializes a matrix of Gs for each pixel
+    Hs = [[initialNumber for y in range(y_size)] for x in range(x_size)] # initializes a matrix of Gs for each pixel
+    Fs = [[initialNumber for y in range(y_size)] for x in range(x_size)] # initializes a matrix of Gs for each pixel
+    pastCoord = start # initializes the starting coordinate
+    openList = {}
+    closedList = []
+    Goal = False
+    while(not Goal):
+        adjacentCoords = [(pastCoord[0]+1,pastCoord[1]),(pastCoord[0]-1,pastCoord[1]),(pastCoord[0],pastCoord[1]+1),(pastCoord[0],pastCoord[1]-1)]
+        for i in adjacentCoords:
+            if(not i in closedList):
+                if(i[0] > 0 and i[0] < x_size and i[1] > 0 and i[1] < y_size):
+                    available = True # initializing the availability to true
+                    for j in range(sizeOfRobot): # run through the edges of the square around the robot
+                        k = 0 # top edge
+                        try:
+                            if(map.getpixel((i[0]+sizeOfRobot/2-j,i[1]+sizeOfRobot/2-k)) == (0,0,0)): # if a pixel on the edge is black
+                                available = False # set available to False as the pixel is no longer allowed
+                                break # exit the for loop
+                        except:
+                                print('bounds too high, but its ok')
+                        k= sizeOfRobot # bottom edge
+                        try:
+                            if(map.getpixel((i[0]+sizeOfRobot/2-j,i[1]+sizeOfRobot/2-k)) == (0,0,0)): # if a pixel on the edge is black
+                                available = False # set available to false as the pixel is no longer allowed
+                                break # exit the for loop
+                        except:
+                                print('bounds too high, but its ok')
+                    if(available): # if it is already not allowed, we can skip this
+                        for k in range(sizeOfRobot): # doing the same as above, but for the rigth and left edges
+                            j = 0
+                            try:
+                                if(map.getpixel((i[0]+sizeOfRobot/2-j,i[1]+sizeOfRobot/2-k)) == (0,0,0)):
+                                    available = False
+                                    break
+                            except:
+                                print('bounds too high, but its ok')
+                            j = sizeOfRobot
+                            try:
+                                if(map.getpixel((i[0]+sizeOfRobot/2-j,i[1]+sizeOfRobot/2-k)) == (0,0,0)):
+                                    available = False
+                                    break
+                            except:
+                                print('bounds too high, but its ok')
+                    if(available): # if the pixel is allowed, change it's cost
+                        Gs[i[0]][i[1]] = Gs[pastCoord[0]][pastCoord[1]] + 1 # changes the cost
+                        Hs[i[0]][i[1]] = abs(finish[1] - i[1]) + abs(finish[0] - i[0])
+                        Fs[i[0]][i[1]] = Hs[i[0]][i[1]] + Gs[i[0]][i[1]]
+                        openList[i] = Fs[i[0]][i[1]]
+                    else:
+                        closedList.append(i)
+        if(finish in openList):
+            Goal = True
+        pastCoord = min(openList, key=openList.get)
+        print(pastCoord)
+        solution.putpixel(pastCoord,(255,0,0))
+        openList.pop(pastCoord)
+        closedList.append(pastCoord)
+    solution.save("Maps/solution.png")
 def fromPathToVectors(ListOfCoordinates):
+    """
+    input: a list of coordinates that the robot goes to
+    output: commands to give the robot to direct it to the goal
+    Very incomplete
+    """
     theta = 0
     oldCoord = (-100,-100)
     for i in ListOfCoordinates:
@@ -129,5 +208,5 @@ def forward(pixels):
     print('forward')
 if __name__ == '__main__':
     start_time = time.time()
-    fromPathToVectors(Navigation((300,300),(600,200),"Maps/MapNon-Fill.png"))
+    Navigation((300,300),(600,200),"Maps/MapNon-Fill.png")
     print("--- %s seconds ---" % (time.time() - start_time))
