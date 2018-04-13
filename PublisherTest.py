@@ -1,11 +1,16 @@
 # rostopic pub -r 10 /cmd_vel geometry_msgs/Twist  '{linear:  {x: 0.1, y: 0.0, z: 0.0}, angular: {x: 0.0,y: 0.0,z: 0.0}}'
-
+"""
+Test code for publishing commands to simulated robot
+"""
 #!/usr/bin/env python
 # license removed for brevity
 import rospy
 from nav2d_operator.msg import cmd
 
 def publish_velocity():
+    """
+    Publishes velocity and heading commands to rostopic /cmd
+    """
     rospy.init_node('vel_test')
     velocity_publisher = rospy.Publisher('cmd', cmd, queue_size=10)
     vel_msg = cmd()
