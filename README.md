@@ -37,7 +37,7 @@ $ sudo apt-get install ros-kinetic-nav2d
 ```
 #### Install packages for collecting data with Turtlebot2:
 
-Move ```/turtlebot_apps``` and ```/openni_camera``` in your ```~/catkin_ws/src```. Then ```catkin_make``` and ```source ~/.bashrc```.
+Clone [turtlebot_apps](https://github.com/turtlebot/turtlebot_apps) and [openni_camera](https://github.com/ros-drivers/openni_camera.git) in your ```~/catkin_ws/src```. Then ```catkin_make``` and ```source ~/.bashrc```.
 
 To teleoperate the Turtlebot2 from your work station, install ssh server on your robot machine
 
