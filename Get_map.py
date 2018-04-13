@@ -1,3 +1,4 @@
+from PIL import Image
 import rospy
 
 from std_msgs.msg import Header, String
@@ -49,6 +50,16 @@ class OccupancyGrid:
                     Occupied[count2, 1] = float(j)
                     count2 += 1
         return Grid, Occupied
+
+
+class Map:
+    def __init__(self,filename):
+        self.map_img = filename
+
+    def convert_pgm_to_png(self):
+        im = Image.open("filename")
+        im.save('map.png')
+
 
 
 if __name__ == '__main__':
