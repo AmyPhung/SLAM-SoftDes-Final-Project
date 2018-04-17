@@ -1,28 +1,14 @@
-from PIL import Image
 import rospy
-
-from std_msgs.msg import Header, String
-from sensor_msgs.msg import LaserScan
-from geometry_msgs.msg import PoseStamped, PoseWithCovarianceStamped, PoseArray, Pose, Point, Quaternion
-from nav_msgs.srv import GetMap
-from copy import deepcopy
-
-import tf
-from tf import TransformListener
-from tf import TransformBroadcaster
-from tf.transformations import euler_from_quaternion, rotation_matrix, quaternion_from_matrix
-from random import gauss
-
-import math
-import time
-
+from nav_msgs.msg import OccupancyGrid
 import numpy as np
-from numpy.random import random_sample
 
-class OccupancyGrid:
+class OccupancyGrids:
     def __init__(self):
+        rospy.init_node('turtlebot_map', anonymous=True)
+        rospy.Subscriber('/map', OccupancyGrid, self.map_callback)
 
-
+    def map_callback(self,data):
+        self.map = data
 
     def get_grid_with_occcupied(self):
         map = self.map
@@ -52,16 +38,10 @@ class OccupancyGrid:
         return Grid, Occupied
 
 
-class Map:
-    def __init__(self,filename):
-        self.map_img = filename
-
-    def convert_pgm_to_png(self):
-        im = Image.open("filename")
-        im.save('map.png')
 
 
 
 if __name__ == '__main__':
-    grid = OccupancyGrid()
-    Grid, Occupied =grid.get_grid_with_occupied()
+    grid = OccupancyGrids()
+    Grid, Occupied =grid.get_grid_with_occcupied()
+    print(Occupied)
