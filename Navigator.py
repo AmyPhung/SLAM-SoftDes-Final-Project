@@ -2,7 +2,7 @@ from PIL import Image, ImageFont, ImageDraw
 import textwrap
 import numpy as np
 import time
-
+import pdb
 def StraightLine(start,finish, map):
     """
     Inputs: starting pixel, finishing pixel, map location
@@ -114,19 +114,27 @@ def actualAStar(start,finish,map):
     Outputs: Draws a line of the path the robot needs to take to get to the goal.
     currently is still being optimized. It doesn't work excellently as it searches too much.
     """
-    sizeOfRobot = 20
+    sizeOfRobot = 3
     map = Image.open(map) # gets the map image
     solution = map # makes a solution map
     x_size = map.size[0] # the x length of the image
     y_size = map.size[1] # the y length of the image
     initialNumber = 10000 # sets the initial values for the Gs, Fs and Hs
-    Gs = [[initialNumber for y in range(y_size)] for x in range(x_size)] # initializes a matrix of Gs for each pixel
-    Hs = [[initialNumber for y in range(y_size)] for x in range(x_size)] # initializes a matrix of Gs for each pixel
-    Fs = [[initialNumber for y in range(y_size)] for x in range(x_size)] # initializes a matrix of Gs for each pixel
-    Gs[start[0]][start[1]] = 0
+    #Gs = [[initialNumber for y in range(y_size)] for x in range(x_size)] # initializes a matrix of Gs for each pixel
+    #Hs = [[initialNumber for y in range(y_size)] for x in range(x_size)] # initializes a matrix of Gs for each pixel
+    #Fs = [[initialNumber for y in range(y_size)] for x in range(x_size)] # initializes a matrix of Gs for each pixel
+    Gs = {}
+    Hs = {}
+    Fs = {}
+    obstacles = {}
+    for i in range(x_size):
+        for j in range(y_size):
+            if(map.getpixel((i,j)) < 253):
+                obstacles[(i,j)] = True
+    Gs[start] = 0
     pastCoord = start # initializes the starting coordinate
     openList = {}
-    closedList = []
+    closedList = {}
     Goal = False
     randomCounter = 0
     while(not Goal):
@@ -134,56 +142,24 @@ def actualAStar(start,finish,map):
         for i in adjacentCoords:
             if(not i in closedList):
                 if(i[0] > 0 and i[0] < x_size and i[1] > 0 and i[1] < y_size):
-                    available = True # initializing the availability to true
-                    for j in range(sizeOfRobot): # run through the edges of the square around the robot
-                        k = 0 # top edge
-                        try:
-                            if(map.getpixel((i[0]+sizeOfRobot/2-j,i[1]+sizeOfRobot/2-k)) == (0,0,0)): # if a pixel on the edge is black
-                                available = False # set available to False as the pixel is no longer allowed
-                                break # exit the for loop
-                        except:
-                                print('bounds too high, but its ok')
-                        k= sizeOfRobot # bottom edge
-                        try:
-                            if(map.getpixel((i[0]+sizeOfRobot/2-j,i[1]+sizeOfRobot/2-k)) == (0,0,0)): # if a pixel on the edge is black
-                                available = False # set available to false as the pixel is no longer allowed
-                                break # exit the for loop
-                        except:
-                                print('bounds too high, but its ok')
-                    if(available): # if it is already not allowed, we can skip this
-                        for k in range(sizeOfRobot): # doing the same as above, but for the rigth and left edges
-                            j = 0
-                            try:
-                                if(map.getpixel((i[0]+sizeOfRobot/2-j,i[1]+sizeOfRobot/2-k)) == (0,0,0)):
-                                    available = False
-                                    break
-                            except:
-                                print('bounds too high, but its ok')
-                            j = sizeOfRobot
-                            try:
-                                if(map.getpixel((i[0]+sizeOfRobot/2-j,i[1]+sizeOfRobot/2-k)) == (0,0,0)):
-                                    available = False
-                                    break
-                            except:
-                                print('bounds too high, but its ok')
+                    available = checkForBorders(i,sizeOfRobot,obstacles)
                     if(available): # if the pixel is allowed, change it's cost
-                        Gs[i[0]][i[1]] = Gs[pastCoord[0]][pastCoord[1]] + 1 # changes the cost
-                        Hs[i[0]][i[1]] = abs(finish[1] - i[1]) + abs(finish[0] - i[0])
-                        Fs[i[0]][i[1]] = Hs[i[0]][i[1]] + Gs[i[0]][i[1]]
-                        openList[i] = Fs[i[0]][i[1]]
+                        Gs[i] = Gs[pastCoord] + 1 # changes the cost
+                        Hs[i] = abs(finish[1] - i[1]) + abs(finish[0] - i[0])
+                        Fs[i] = Hs[i] + Gs[i]
+                        openList[i] = Fs[i]
                     else:
-                        closedList.append(i)
+                        closedList[i] = True
         if(finish in openList):
             Goal = True
         min_val = min(openList.itervalues())
         goodKeys = [k for k, v in openList.iteritems() if v == min_val]
         HDict = {}
         for i in goodKeys:
-            HDict[i] = Hs[i[0]][i[1]]
+            HDict[i] = Hs[i]
         pastCoord = min(HDict, key=HDict.get)
-        solution.putpixel(pastCoord,(255,0,0))
         openList.pop(pastCoord)
-        closedList.append(pastCoord)
+        closedList[pastCoord] = True
     oldPixel = finish # starts with the old pixels at the finish
     ListOfCoordinates = [finish]
     coords = [finish]
@@ -192,17 +168,32 @@ def actualAStar(start,finish,map):
         Gvalues = [10000,10000,10000,10000] # initializes their values to 0
         for i in range(len(coords)): # puts their values in
             try:
-                Gvalues[i] = Gs[coords[i][0]][coords[i][1]]
+                Gvalues[i] = Gs[coords[i]]
             except:
                 Gvalues[i] = 10000
         if(sum(Gvalues) < 20): # if the sum of them is less than 10, the start has been reached
             break
-        print(Gvalues)
         coordToGoTo = coords[Gvalues.index(min(Gvalues))] # adds the coordinate that we want to go to next.
         ListOfCoordinates = [coordToGoTo] + ListOfCoordinates
         solution.putpixel(coordToGoTo,(0,255,0)) # makes that coordinate red
         oldPixel = coordToGoTo # does it again
     solution.save("Maps/solution.png")
+def checkForBorders(i,sizeOfRobot,obstacles):
+    for j in range(sizeOfRobot): # run through the edges of the square around the robot
+        k = 0 # top edge
+        if (i[0]+sizeOfRobot/2-j,i[1]+sizeOfRobot/2-k) in obstacles: # if a pixel on the edge is black
+            return False # set available to False as the pixel is no longer allowed
+        k= sizeOfRobot # bottom edge
+        if(i[0]+sizeOfRobot/2-j,i[1]+sizeOfRobot/2-k) in obstacles: # if a pixel on the edge is black
+            return False # set available to false as the pixel is no longer allowed
+    for k in range(sizeOfRobot): # doing the same as above, but for the rigth and left edges
+        j = 0
+        if(i[0]+sizeOfRobot/2-j,i[1]+sizeOfRobot/2-k) in obstacles:
+            return False
+        j = sizeOfRobot
+        if(i[0]+sizeOfRobot/2-j,i[1]+sizeOfRobot/2-k) in obstacles:
+            return False
+    return True
 def fromPathToVectors(ListOfCoordinates):
     """
     input: a list of coordinates that the robot goes to
@@ -234,5 +225,5 @@ def forward(pixels):
     print('forward')
 if __name__ == '__main__':
     start_time = time.time()
-    actualAStar((100,475),(600,200),"Maps/MapNon-Fill.png")
+    actualAStar((300,290),(575,215),"markdown_files/library_lower.png")
     print("--- %s seconds ---" % (time.time() - start_time))
