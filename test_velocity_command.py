@@ -194,36 +194,6 @@ def checkForBorders(i,sizeOfRobot,obstacles):
         if(i[0]+sizeOfRobot/2-j,i[1]+sizeOfRobot/2-k) in obstacles:
             return False
     return True
-def fromPathToVectors(ListOfCoordinates):
-    """
-    input: a list of coordinates that the robot goes to
-    output: commands to give the robot to direct it to the goal
-    Very incomplete
-    """
-    theta = 0
-    oldCoord = (-100,-100)
-    for i in ListOfCoordinates:
-        xDiff = i[0] - oldCoord[0]
-        yDiff = i[1] - oldCoord[1]
-        if(not (xDiff > 100 and yDiff > 100)):
-            if(xDiff == 1):
-                TurnToTheta(0)
-            elif(xDiff == -1):
-                TurnToTheta(180)
-            elif(yDiff == 1):
-                TurnToTheta(90)
-            elif(yDiff == -1):
-                TurnToTheta(270)
-            else:
-                raise Exception("invalid Coordinates")
-            forward(1)
-        oldCoord = i
-
-def TurnToTheta(theta):
-    print(theta)
-def forward(pixels):
-    print('forward')
-
 
 if __name__ == '__main__':
     start_time = time.time()
