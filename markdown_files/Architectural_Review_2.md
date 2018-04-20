@@ -7,7 +7,7 @@ See if there are more efficient and/or easier algorithms to try for maze navigat
 Use Gmapping, a ROS package, to make a map from collected lidar data with a Turtlebot then write a script that uses an algorithm to trace out the shortest correct route on the map and send commands to a simulated robot.
 
 ### Map Data
-The Ros Gmapping package allows us to do SLAM on collected lidar data and create a map by driving the Turtlebot around an area. The gray regions are unexplored area and black lines or dots are boundaries or obstacles. We found the package worked the best when collecting data in a confined region and the two pictures show below are two maps we collected in the lower level of Olin library. The next step would be to c
+The Ros Gmapping package allows us to do SLAM on collected lidar data and create a map by driving the Turtlebot around an area. The gray regions are unexplored area and black lines or dots are boundaries or obstacles. We found the package worked the best when collecting data in a confined region and the two pictures show below are two maps we collected in the lower level of Olin library. The next step would be to collect more map data to work with for the navigation algorithm.
 
 Map 1:
 ![Library Map1](library_lower.png)
@@ -24,6 +24,8 @@ are computed and published to ROS velocity and heading topics to control the
 simulation. When we are confident our code works and have thoroughly tested it
 in simulation, we will move forward with testing it with the Turtlebot.
 ![Path of Simulated Robot in Test Map](MapTrace.JPG)
+
+Turtlebot2:
 ![Picture of TurtleBot](TurtleBot.png)
 
 ## Key questions
