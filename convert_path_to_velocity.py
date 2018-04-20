@@ -31,8 +31,8 @@ class Path_To_Velocity:
         distances = {}
         directions = {}
         for i in range(len(headings)):
-            x = headings[i][1]
-            y = headings[i][2]
+            x = headings[i][0]
+            y = headings[i][1]
 
             # get distance and direction
             distance = math.sqrt(x ** 2 + y ** 2)
@@ -84,5 +84,5 @@ class Path_To_Velocity:
 
 
 if __name__ == '__main__':
-    robot = Path_To_Velocity(path, 5)
+    robot = Path_To_Velocity(path, 6)
     robot.get_velocity_commands(5)
