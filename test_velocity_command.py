@@ -128,7 +128,7 @@ def actualAStar(start,finish,map):
     obstacles = {}
     for i in range(x_size):
         for j in range(y_size):
-            if(map.getpixel((i,j)) < 253):
+            if(map.getpixel((i,j))[1] < 253):
                 obstacles[(i,j)] = True
     Gs[start] = 0
     pastCoord = start # initializes the starting coordinate
@@ -197,7 +197,7 @@ def checkForBorders(i,sizeOfRobot,obstacles):
 
 if __name__ == '__main__':
     start_time = time.time()
-    coordinates = actualAStar((300,290),(575,215),"Maps/map2.png")
+    coordinates = actualAStar((500,130),(575,215),"Maps/map2.png")
     robot = Path_To_Velocity(coordinates, 6) #6 is 6s for time step
     commands = robot.get_velocity_commands(5) #5 is how many pixels to skip
     print(commands)
