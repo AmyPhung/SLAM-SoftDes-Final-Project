@@ -1,3 +1,8 @@
+---
+title: Home
+subtitle: Subtitle?
+---
+
 # Intro
 ** Introduction to our Project **
 
