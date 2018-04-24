@@ -65,7 +65,9 @@ footer-link-col: "#404040"
 # Important: you must keep the "name" parameter, everything else you can remove
 author:
   name: Amy Phung
+author:
   name: Sherrie Shen
+author:
   name: Nathan Estill
 
 # Select your active Social Network Links.
