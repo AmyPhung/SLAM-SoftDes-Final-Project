@@ -1,6 +1,6 @@
 ---
 title: PAGE TITLE HERE
-layout: template
+layout: 
 filename: page1.md
 --- 
 
