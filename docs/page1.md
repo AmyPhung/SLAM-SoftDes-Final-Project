@@ -1,7 +1,7 @@
 ---
 title: PAGE TITLE HERE
 layout: template
-filename: NAME OF THIS .md FILE HERE
+filename: page1.md
 --- 
 
 # Test Page
