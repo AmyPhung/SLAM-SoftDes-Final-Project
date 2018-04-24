@@ -25,8 +25,12 @@ title: Map Navigation With Turtlebot 2
 navbar-links:
   
   Home: "index.md"
-  Test: "Story.md"
+  Story: "Story.md"
+  Applications: "Applications.md"
+  Background: "Background.md"
+  Demonstration: "Demonstration.md"
   Resources:
+    - ROS: "http://www.ros.org/"
     - Beautiful Jekyll: "http://deanattali.com/beautiful-jekyll/"
   About Us: "aboutme"
 
@@ -64,11 +68,8 @@ footer-link-col: "#404040"
 # Change all these values or delete the ones you don't want.
 # Important: you must keep the "name" parameter, everything else you can remove
 author:
-  name: Amy Phung
-author:
-  name: Sherrie Shen
-author:
-  name: Nathan Estill
+  name: Amy Phung, Sherrie Shen, and Nathan Estill
+
 
 # Select your active Social Network Links.
 # Uncomment the links you want to show in the footer and add your information to each link.
