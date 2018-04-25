@@ -1,6 +1,6 @@
 from math import *
 from numpy import *
-
+from Navigator import Navigator
 
 class Path_To_Velocity:
     def __init__(self, pixel, time_step):
@@ -84,5 +84,7 @@ class Path_To_Velocity:
 
 
 if __name__ == '__main__':
-    robot = Path_To_Velocity(path, 6)
+    nav = Navigator()
+    coordinates = nav.actualAStar((300,290),(575,215),"markdown_files/library_lower.png")
+    robot = Path_To_Velocity(coordinates, 6)
     robot.get_velocity_commands(5)
