@@ -1,3 +1,6 @@
+---
+---
+
 # Demonstration
 We start out by getting the following map from Lidar data from the TurtleBot.
 ![Example Map of the Library](library_lower_day2.png)
