@@ -3,16 +3,14 @@
   <name>nav_turtle</name>
   <version>1.0.0</version>
   <description>
-    Stage version of turtlebot simulation. Convenient to test 2D-navigation related stuffs
+    Stage and RVIZ simulation of turtlebot created for a class final project. Navigates turtlebot through a map in both simulation and through physical platform. Heavily based on https://github.com/turtlebot/turtlebot_simulator/tree/indigo/turtlebot_stage and uses maps generated from http://wiki.ros.org/gmapping
   </description>
 
-  <maintainer email="jihoonl@yujinrobot.com">Jihoon Lee</maintainer>
-  <author email="jorge@yujinrobot.com">Jorge Santos</author>
-  <license>BSD</license>
+  <maintainer email="amy.phung@students.olin.edu">Amy Phung</maintainer>
+  <maintainer email="nathan.estill@students.olin.edu">Nathan Estill</maintainer>
+  <maintainer email="xierui.shen@students.olin.edu">Sherrie Shen</maintainer>
 
-  <url type="website">http://wiki.ros.org/turtlebot_stage</url>
-  <url type="repository">https://github.com/turtlebot/turtlebot_simulator</url>
-  <url type="bugtracker">https://github.com/turtlebot/turtlebot_simulator/issues</url>
+  <license>BSD</license>
 
   <buildtool_depend>catkin</buildtool_depend>
   <run_depend>stage_ros</run_depend>
