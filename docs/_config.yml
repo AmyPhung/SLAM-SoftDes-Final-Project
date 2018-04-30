@@ -9,7 +9,7 @@
 
 # If you are building a GitHub project page then use these settings:
 url: "http://amyphung.github.io/SLAM-SoftDes-Final-Project"
-baseurl: "/SLAM-SoftDes-Final-Project"
+baseurl: "/SLAM-SoftDes-Final-Project/home"
 
 # Of course don't forget to change the username and projectname to YOUR username and project
 
