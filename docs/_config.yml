@@ -9,7 +9,7 @@
 
 # If you are building a GitHub project page then use these settings:
 url: "http://amyphung.github.io/SLAM-SoftDes-Final-Project"
-baseurl: "/SLAM-SoftDes-Final-Project/home"
+baseurl: "/SLAM-SoftDes-Final-Project"
 
 # Of course don't forget to change the username and projectname to YOUR username and project
 
@@ -24,7 +24,7 @@ title: Map Navigation With Turtlebot 2
 # List of links in the navigation bar
 navbar-links:
 
-  Home: "Home"
+  Home: "index"
   Story: "Story"
   Project:
     - Code: "https://github.com/AmyPhung/SLAM-SoftDes-Final-Project"
