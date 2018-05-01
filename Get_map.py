@@ -2,12 +2,13 @@ import rospy
 from nav_msgs.msg import OccupancyGrid
 import numpy as np
 
+
 class OccupancyGrids:
     def __init__(self):
         rospy.init_node('turtlebot_map', anonymous=True)
         rospy.Subscriber('/map', OccupancyGrid, self.map_callback)
 
-    def map_callback(self,data):
+    def map_callback(self, data):
         self.map = data
 
     def get_grid_with_occcupied(self):
@@ -38,10 +39,7 @@ class OccupancyGrids:
         return Grid, Occupied
 
 
-
-
-
 if __name__ == '__main__':
     grid = OccupancyGrids()
-    Grid, Occupied =grid.get_grid_with_occcupied()
+    Grid, Occupied = grid.get_grid_with_occcupied()
     print(Occupied)

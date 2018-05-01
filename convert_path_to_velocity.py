@@ -2,10 +2,12 @@ from math import *
 from numpy import *
 from Navigator import Navigator
 
+
 class Path_To_Velocity:
     def __init__(self, pixel, time_step):
         self.path = pixel
         self.time_step = time_step
+        self.converting_factor = 0.0002645833
 
     def linear_approximation(self, num):
         """
@@ -49,7 +51,7 @@ class Path_To_Velocity:
         """
         distances, directions = self.get_distance_direction(num)
         commands = []
-        old_direction = (0, 1)
+        old_direction = (1, 0)
         for i in range(len(distances)):
             # find angle to turn
             new_direction = directions[i]
@@ -66,9 +68,10 @@ class Path_To_Velocity:
             else:
                 angle_new = angle_new_cos
             theta = angle_new - angle_old
+            # print('theta',theta)
 
             # calculate linear velocity
-            linear_velocity = distances[i] / self.time_step
+            linear_velocity = distances[i] / self.time_step * self.converting_factor
 
             # calculate angular velocity
             angular_velocity = theta / self.time_step
@@ -85,6 +88,6 @@ class Path_To_Velocity:
 
 if __name__ == '__main__':
     nav = Navigator()
-    coordinates = nav.actualAStar((300,290),(575,215),"markdown_files/library_lower.png")
+    coordinates = nav.actualAStar((300, 290), (575, 215), "markdown_files/library_lower.png")
     robot = Path_To_Velocity(coordinates, 6)
-    robot.get_velocity_commands(5)
+    robot.get_velocity_commands(10)

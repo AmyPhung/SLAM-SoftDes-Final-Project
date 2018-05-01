@@ -27,6 +27,6 @@ if __name__ == '__main__':
     turtle1 = Turtlebot()
     nav = Navigator()
     coordinates = nav.actualAStar((300,290),(575,215),"markdown_files/library_lower.png")
-    Converter = Path_To_Velocity(coordinates,6)
-    commands = Converter.get_velocity_commands(5)
+    Converter = Path_To_Velocity(coordinates,1)
+    commands = Converter.get_velocity_commands(10)
     turtle1.goForward(commands)

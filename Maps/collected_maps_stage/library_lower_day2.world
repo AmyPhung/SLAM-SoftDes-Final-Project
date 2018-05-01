@@ -31,14 +31,14 @@ floorplan
 (
   name "library_lower_day2"
   bitmap "./library_lower_day2.png"
-  size [ 1000.0 1000.0 2.0 ]
+  size [ 10.0 10.0 2.0 ]
   pose [  5.0  5.0 0.0 0.0 ]
 )
 
 # throw in a robot
 turtlebot
 (
-  pose [ -5.0 -5.0 0.0 0.0 ]
+  pose [ 0.0 0.0 0.0 0.0 ]
   name "turtlebot"
   color "black"
 )

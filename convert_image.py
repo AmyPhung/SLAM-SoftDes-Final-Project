@@ -1,5 +1,6 @@
 import cv2
 
+
 class Map:
     def __init__(self, filename):
         self.map_img = filename
@@ -9,6 +10,7 @@ class Map:
         color_im = cv2.cvtColor(im, cv2.COLOR_GRAY2BGR)
         blur_im = cv2.GaussianBlur(color_im, (5, 5), 0)
         cv2.imwrite('./Maps/%s' % name, blur_im)
+
 
 if __name__ == '__main__':
     lib = Map('./Maps/library_lower_day2.pgm')
