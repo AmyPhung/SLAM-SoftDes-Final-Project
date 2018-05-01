@@ -68,7 +68,7 @@ class Path_To_Velocity:
             else:
                 angle_new = angle_new_cos
             theta = angle_new - angle_old
-            # print('theta',theta)
+            print('theta',theta)
 
             # calculate linear velocity
             linear_velocity = distances[i] / self.time_step * self.converting_factor
