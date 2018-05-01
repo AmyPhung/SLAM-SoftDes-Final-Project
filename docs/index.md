@@ -10,7 +10,7 @@ Our launch file encompasses the following all into one easy step.
 
 ![Architecture Diagram](ArchDiagram.jpg)
 
-## For more information about environment setup, algorithms, and how to use our code, please see our Wiki!
+## For more technical information about environment setup, algorithms, and how to use our code, please see our Wiki!
 [Link to our Wiki](https://github.com/AmyPhung/SLAM-SoftDes-Final-Project/wiki)
 
 [Source Code](https://github.com/AmyPhung/SLAM-SoftDes-Final-Project)
