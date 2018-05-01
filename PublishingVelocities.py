@@ -14,19 +14,21 @@ class Turtlebot:
                 output = Twist()
                 output.linear = Vector3(listOfVelocities[i],0,0)
                 output.angular = Vector3(0,0,0)
-                self.velpub.publish(output)
-                rospy.sleep(1.)
+                for j in range(10):
+                    self.velpub.publish(output)
+                    rospy.sleep(0.1)
             else:
                 output = Twist()
                 output.linear = Vector3(0,0,0)
-                output.angular = Vector3(listOfVelocities[i],0,0)
-                self.velpub.publish(output)
-                rospy.sleep(1.)
+                output.angular = Vector3(0,0,listOfVelocities[i])
+                for j in range(10):
+                    self.velpub.publish(output)
+                    rospy.sleep(0.1)
 
 if __name__ == '__main__':
     turtle1 = Turtlebot()
     nav = Navigator()
-    coordinates = nav.actualAStar((300,290),(575,215),"markdown_files/library_lower.png")
+    coordinates = nav.actualAStar((368,368),(575,215),"Maps/collected_maps_stage/library_lower.png")
     Converter = Path_To_Velocity(coordinates,1)
-    commands = Converter.get_velocity_commands(10)
+    commands = Converter.get_velocity_commands(5)
     turtle1.goForward(commands)
