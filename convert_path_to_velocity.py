@@ -7,8 +7,8 @@ class Path_To_Velocity:
     def __init__(self, pixel, time_step):
         self.path = pixel
         self.time_step = time_step
-        self.converting_factor = 0.0002645833
-
+        #self.converting_factor = 0.0002645833
+        self.converting_factor = 0.05
     def linear_approximation(self, num):
         """
         :param num: number of pixels skipped

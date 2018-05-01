@@ -115,7 +115,7 @@ class Navigator():
         Outputs: Draws a line of the path the robot needs to take to get to the goal.
         currently is still being optimized. It doesn't work excellently as it searches too much.
         """
-        sizeOfRobot = 5
+        sizeOfRobot = 6
         map = Image.open(map) # gets the map image
         solution = map # makes a solution map
         x_size = map.size[0] # the x length of the image
