@@ -115,7 +115,7 @@ class Navigator():
         Outputs: Draws a line of the path the robot needs to take to get to the goal.
         currently is still being optimized. It doesn't work excellently as it searches too much.
         """
-        sizeOfRobot = 3
+        sizeOfRobot = 5
         map = Image.open(map) # gets the map image
         solution = map # makes a solution map
         x_size = map.size[0] # the x length of the image
@@ -130,7 +130,7 @@ class Navigator():
         obstacles = {}
         for i in range(x_size):
             for j in range(y_size):
-                if(map.getpixel((i,j)) < 253):
+                if(map.getpixel((i,j))[1] < 253):
                     obstacles[(i,j)] = True
         Gs[start] = 0
         pastCoord = start # initializes the starting coordinate
@@ -200,6 +200,6 @@ class Navigator():
 if __name__ == '__main__':
     start_time = time.time()
     nav = Navigator()
-    coordinates = nav.actualAStar((300,290),(575,215),"markdown_files/library_lower.png")
+    coordinates = nav.actualAStar((300,290),(575,215),"Maps/collected_maps_stage/library_lower.png")
     print(coordinates)
     print("--- %s seconds ---" % (time.time() - start_time))
