@@ -9,3 +9,4 @@ Then we select two points in the map that we want the robot to traverse, and our
 Then our program will send this path to another script that has a simulated robot traverse the path in real time.
 
 -- To Do --
+Add video of robot navigating area
