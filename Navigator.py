@@ -12,7 +12,6 @@ class Navigator():
         """
         sizeOfRobot = 3 # determines the radius of the robot in pixels
         map = Image.open(map) # gets the map image
-        solution = map # makes a solution map
         x_size = map.size[0] # the x length of the image
         y_size = map.size[1] # the y length of the image
         initialNumber = 10000 # sets the initial values for the Gs, Fs and Hs
@@ -56,7 +55,11 @@ class Navigator():
             pastCoord = min(HDict, key=HDict.get) # from here, gets the pixel with the lowest H value (most likely to be close to the goal)
             openList.pop(pastCoord)
             closedList[pastCoord] = True
-        oldPixel = finish # starts with the old pixels at the finish
+        ListOfCoordinates = self.plotPath(start,finish,Gs,map)
+        return ListOfCoordinates
+    def plotPath(self,start,finish,Gs,map):
+        solution = map
+        oldPixel = finish
         ListOfCoordinates = [finish]
         coords = [finish]
         while(start != oldPixel): # while we havn't gotten to the start yet
@@ -67,8 +70,6 @@ class Navigator():
                     Gvalues[i] = Gs[coords[i]]
                 except:
                     Gvalues[i] = 10000
-            # if(sum(Gvalues) < 20): # if the sum of them is less than 10, the start has been reached
-            #     break
             coordToGoTo = coords[Gvalues.index(min(Gvalues))] # adds the coordinate that we want to go to next.
             ListOfCoordinates = [coordToGoTo] + ListOfCoordinates
             solution.putpixel(coordToGoTo,(0,255,0)) # makes that coordinate red
@@ -79,6 +80,7 @@ class Navigator():
         """
         Checks the edges of the robot to determine if the pixel in question is a pixel that is allowed to be travelled
         input: i, the coordinate in question, sizeOfRobot, the size of the robot in pixels, obstacles, the coordinates of all the obstacles
+        output: boolean, whether the pixel is available or not.
         """
         for j in range(sizeOfRobot): # run through the edges of the square around the robot
             k = 0 # top edge
