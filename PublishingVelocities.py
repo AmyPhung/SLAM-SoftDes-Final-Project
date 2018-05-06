@@ -12,6 +12,8 @@ class Turtlebot:
         Input: takes a list of Velocities, alternating angular and linear.
         Output: publishes velocities for a certain amount of time to the rostopic
         """
+        r = rospy.Rate(20)
+        r.sleep()
         for i in range(len(listOfVelocities)):
             print(listOfVelocities[i])
             if(i % 2 == 1):
@@ -19,7 +21,6 @@ class Turtlebot:
                 output.linear = Vector3(listOfVelocities[i] / 4.0,0,0)
                 output.angular = Vector3(0,0,0)
                 now = rospy.get_time()
-                r = rospy.Rate(20) # 20 Hz
                 while(now + 4.0 > rospy.get_time()) and (not rospy.is_shutdown()):
                     self.velpub.publish(output)
                     r.sleep()
@@ -31,7 +32,6 @@ class Turtlebot:
                     output.linear = Vector3(0,0,0)
                     output.angular = Vector3(0,0,-listOfVelocities[i] / 2.0)
                     now = rospy.get_time()
-                    r = rospy.Rate(20) # 20hz
                     while(now + 2.0 > rospy.get_time()) and (not rospy.is_shutdown()):
                         self.velpub.publish(output)
                         r.sleep()
