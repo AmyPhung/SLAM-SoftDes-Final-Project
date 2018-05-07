@@ -33,7 +33,8 @@ navbar-links:
     - Demonstration: "Demonstration"
   Key Resources:
     - ROS: "http://www.ros.org/"
-    - Beautiful Jekyll: "http://deanattali.com/beautiful-jekyll/"
+    - gmapping: "http://wiki.ros.org/gmapping"
+    - TurtleBot: "https://www.turtlebot.com/"
     - Full list of resources: "https://github.com/AmyPhung/SLAM-SoftDes-Final-Project/wiki/Helpful-Links-and-References"
   About Us: "AboutUs"
 
