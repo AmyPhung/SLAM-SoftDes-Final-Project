@@ -16,6 +16,8 @@ This project is licensed under the SAN License - see the [LICENSE.md](LICENSE.md
 
 ## Acknowledgments
 
-* [Gaitech Turtlebot Tutorial](http://edu.gaitech.hk/turtlebot/create-map-kenict.html)
-* Nav_2D
-* hector_slam
+* [ROS](http://www.ros.org/)
+* [gmapping](http://wiki.ros.org/gmapping)
+* [TurtleBot 2](https://www.turtlebot.com/)
+
+For full list of resources used, see our wiki page here: (https://github.com/AmyPhung/SLAM-SoftDes-Final-Project/wiki/Helpful-Links-and-References)
