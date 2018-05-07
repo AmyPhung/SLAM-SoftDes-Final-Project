@@ -2,7 +2,10 @@ import rospy
 from convert_path_to_velocity import Path_To_Velocity
 from geometry_msgs.msg import Vector3, Twist
 from Navigator import Navigator
-
+"""
+Author: Nathan Estill, https://github.com/nathanestill
+This code takes in a list of velocities and publishes them to the rostopic.
+"""
 class Turtlebot:
     def __init__(self):
         rospy.init_node('Velocities')
