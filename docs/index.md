@@ -4,9 +4,10 @@ subtitle: Website for SoftDes Final Project 2018
 ---
 
 # Intro
-We made a program that allows a robot to navigate a known map effectively. We got a map of the third floor of the Campus Center at Olin College by running a Turtlebot through the floor and receiving LIDAR data from a Kinect. From there we selected a goal for the simulated robot to go to and our program calculated the best path for the robot to take. Then we gave the robot instructions on how to navigate the map to get to the goal.
+We made a program that allows a robot to navigate a known map effectively. We got a map of the third floor of the Campus Center at Olin College by running a Turtlebot around the space and receiving LIDAR data from a Kinect. From there we selected a goal for the simulated robot to go to and our program calculated the best path for the robot to take. Then we gave the robot instructions on how to navigate the map to get to the goal.
 
-[![IMAGE ALT TEXT HERE](https://img.youtube.com/vi/Fnh2aS3DxgY/0.jpg)](https://www.youtube.com/watch?v=Fnh2aS3DxgY)
+For a brief introduction to our project, watch our video here:
+[![Intro Video](img/HomeVideo.JPG)](https://www.youtube.com/watch?v=Fnh2aS3DxgY)
 
 
 The following pictures are a visualization of the path that the robot takes in simulation and real life.
