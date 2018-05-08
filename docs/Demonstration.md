@@ -17,3 +17,5 @@ Then our program will send this path to another script that has a simulated robo
 A short gif of how A* finds the best path through a maze.
 
 [![IMAGE ALT TEXT HERE](https://img.youtube.com/vi/fbsQO-QRdyw/0.jpg)](https://www.youtube.com/watch?v=fbsQO-QRdyw)
+
+A video of the robot going along a path.
