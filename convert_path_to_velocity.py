@@ -2,6 +2,10 @@ from math import *
 from numpy import *
 from Navigator import Navigator
 
+"""
+Author: Sherrie Shen
+This code uses the list of pixels returned from Navigator.py and computes the linear and angular velocity.
+"""
 
 class Path_To_Velocity:
     def __init__(self, pixel, time_step):

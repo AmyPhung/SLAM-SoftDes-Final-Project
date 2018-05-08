@@ -1,5 +1,9 @@
 import cv2
 
+"""
+Author: Sherrie Shen
+This code converts a grayscale image to BGR and applies a Gaussian blur.
+"""
 
 class Map:
     def __init__(self, filename):
