@@ -3,6 +3,10 @@ import textwrap
 import numpy as np
 import time
 import pdb
+"""
+Author: Nathan Estill, https://github.com/nathanestill
+This code uses A* to take in an image and return a list of pixels that is the best path from two points.
+"""
 class Navigator():
     def actualAStar(self,start,finish,map):
         """
