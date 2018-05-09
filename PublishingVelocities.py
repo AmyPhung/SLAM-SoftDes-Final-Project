@@ -8,7 +8,7 @@ This code takes in a list of velocities and publishes them to the rostopic.
 """
 class Turtlebot:
     def __init__(self):
-        rospy.init_node('Velocities')
+        # rospy.init_node('Velocities')
         self.velpub = rospy.Publisher('/cmd_vel_mux/input/navi',Twist,queue_size=10)
     def publishVelocities(self,listOfVelocities):
         """
@@ -21,10 +21,10 @@ class Turtlebot:
             print(listOfVelocities[i])
             if(i % 2 == 1):
                 output = Twist()
-                output.linear = Vector3(listOfVelocities[i] / 4.0,0,0)
+                output.linear = Vector3(listOfVelocities[i],0,0)
                 output.angular = Vector3(0,0,0)
                 now = rospy.get_time()
-                while(now + 4.0 > rospy.get_time()) and (not rospy.is_shutdown()):
+                while(now + 1.0 > rospy.get_time()) and (not rospy.is_shutdown()):
                     self.velpub.publish(output)
                     r.sleep()
             else:
@@ -33,9 +33,9 @@ class Turtlebot:
                     if(listOfVelocities[i] > 3.14):
                         listOfVelocities[i] = listOfVelocities[i] - 6.28
                     output.linear = Vector3(0,0,0)
-                    output.angular = Vector3(0,0,-listOfVelocities[i] / 2.0)
+                    output.angular = Vector3(0,0,-listOfVelocities[i])
                     now = rospy.get_time()
-                    while(now + 2.0 > rospy.get_time()) and (not rospy.is_shutdown()):
+                    while(now + 1.0 > rospy.get_time()) and (not rospy.is_shutdown()):
                         self.velpub.publish(output)
                         r.sleep()
     def Turn(self):
