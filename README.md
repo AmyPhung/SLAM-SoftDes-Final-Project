@@ -4,6 +4,8 @@ This project allows a user to specify a starting point and end goal in a given m
 
 For more information, including code usage, see our wiki here: (https://github.com/AmyPhung/SLAM-SoftDes-Final-Project/wiki)
 
+See the project website here: (https://amyphung.github.io/SLAM-SoftDes-Final-Project/)
+
 ## Authors
 
 * **Amy Phung**
